@@ -291,6 +291,8 @@ function gen_rep_ramdisk() {
 	cp "$BD/gearlock" "$OSROOT" || endjob "Failed to place gearlock boot image in OSROOT"
 	test -e "$BD/gearlock.img" && rm -f "$BD/gearlock.img"
 	nout chmod 777 "$OSROOT"/*img "$OSROOT/gearlock"
+	nout chmod 4755 "$OSROOT/gearlock/bin/su"
+	nout chown root:root "$OSROOT/gearlock/bin/su"
 	for prog in sync fsync; do
 		{
 			$prog "$IRN" "$OSROOT/gearlock"
